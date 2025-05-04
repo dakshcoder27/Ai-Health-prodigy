@@ -1,0 +1,26 @@
+# Ignore virtual environment
+env/
+
+# Ignore all files in models/
+models/*
+
+# Except these files in models/
+!models/liver-model.pkl
+
+# You can un-ignore additional files like this:
+#!models/another-model.pkl
+
+# Bytecode and cache
+__pycache__/
+*.py[cod]
+
+# SQLite DB file
+db.sqlite3
+
+# Environment files
+.env
+
+# System/IDE files
+*.DS_Store
+.vscode/
+.idea/
