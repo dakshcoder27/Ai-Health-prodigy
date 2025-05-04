@@ -227,7 +227,7 @@ stopButton.addEventListener("click", function () {
 
 const handleSuccess = function (stream) {
     console.log('add');
-    const options = { mimeType: "audio/webm" };
+    const options = { mimeType: "audio/webm;codecs=opus" };
     recordedChunks = [];
     mediaRecorder = new MediaRecorder(stream, options);
 
