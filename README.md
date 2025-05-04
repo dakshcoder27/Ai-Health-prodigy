@@ -1,11 +1,10 @@
 ## Project Name 
-__Apna Doctor - An AI based Health-CheckUp Web Tool__
+__Ai Health Prodigy An AI based Health-CheckUp Web Tool__
 
 
 ## Motivation
 
 - Whenever a patient visits a hospital it takes a significant amount of time before the updated health reports of the patient arrives making it difficult for the proper detection and hence decision making for the health official. 
-- Also, it has now become unsafe to go to the hospital every time we feel unwell, since there is a risk of getting affected by COVID-19. The pandemic has caused an influx in hospital cases, and the limitations on hospital beds have people wondering whether their symptoms are severe enough to warrant a doctor's appointment. 
 - Meanwhile, others experience ailments but are unable to afford a visit to the doctor due to a lack of or poor health care. Further, if the patient recognizes his/her symptoms, and if somehow we can tell him what is the disease he is likely to be affected with then he/she can take precautions accordingly at home only.
 - Since, everyone should have easy access to great health care there is a need to connect patients virtually with doctors.
 - So, our project aims to not only effectively connect doctors and patients virtually but incase if a patient recognises the symptoms, then he/she can know what disease he/she is likely to be infected with and what precautionary measures can be taken with the help of Artificial Intelligence
@@ -14,21 +13,17 @@ __Apna Doctor - An AI based Health-CheckUp Web Tool__
 
 The application mainly consists of three features:
 
-- First, we have designed a computer-aided diagnosis system (or disease prediction system) where users can get to know whether they are infected with a particular disease or not using machine/deep learning. For this, they are required to enter their medical details on the form or upload X-Ray/MRI image.
+- First, we have designed a computer-aided diagnosis system (or disease prediction system) where users can get to know whether they are infected with a particular disease or not using machine/deep learning. For this, they are required to enter their medical details on the form or upload MRI image.
 - Secondly, there is a feature to enter the symptoms (either simply type the symptoms or record the audio in browser) they are experiencing and the patients will get to know what possible diseases they might have along with the precautions that they must take.
 - Third feature is the doctor appointment system wherein patients can not only search doctors based on region or specialization, but also connect virtually with the doctors around the globe.
 
 ## Requirements:
-- Frontend: Html5, CSS, JavaScript
-- Backend: Django, AWS
-- Database: SQLite or PostgreSQL
+- Frontend: Html5, CSS, JavaScript, Jquery, Bootstrap
+- Backend: Django
+- Database: SQLite 
 - Machine/Deep Learning Frameworks: Scikit-Learn, Tensorflow/PyTorch
 - Dataset platform: Kaggle
 - Browser: Any web browser like Chrome, Firefox for running the web application
-
-## Video Link of Working Model
-
-[Project Demonstration](https://youtu.be/M4L4yVYhDYI)
 
 
 ## Getting Started
@@ -65,12 +60,10 @@ pip install -r requirements.txt
 
 The trained deep learning models can be downloaded from [here](https://drive.google.com/drive/folders/1_A7VgM08sQ6Pgzb7ohmTb17EyRASAOCb).
 
-**Step 4. Set up Amazon Transcribe API for speech to text conversion**
+**Step 4. Set up ffmpeg for speech to text conversion**
 
-- Create an AWS free tier account.
-- Sign in to your Amazon console, create a _S3 bucket_ and give it a unique name. Note your AWS region as it will be required later.
-- Go to _IAM dashboard_, add a new User. Then click on add permissions and grant the following two permissions - _AmazonTranscribeFullAccess_ and _AmazonS3FullAccess_.
-- Then under Security Credentials, click on _Create access key_ to get your credentials i.e, 'aws_access_key_id' and 'aws_secret_access_key'.
+1. Go to: https://ffmpeg.org/download.html download the ffmpeg full release build zip file
+2. Extract the zip file locate the ffmpeg.exe and copy the path and add it to enviroment variables
 
 **Step 5. Update environment variables.**
 
@@ -155,10 +148,4 @@ python manage.py runserver
 
 ![Booking Time Slot](website-screenshots/Booking.png)
 
-## Confirmation Mail
 
-![Confirmation Mail](website-screenshots/mail.JPG)
-
-## Video Call
-
-![Video Call](website-screenshots/Videocall.png)
