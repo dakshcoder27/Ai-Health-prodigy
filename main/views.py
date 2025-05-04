@@ -2,17 +2,12 @@ from django.shortcuts import render , redirect
 from django.http import HttpResponse , HttpResponseRedirect , JsonResponse , FileResponse
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
-from models.classifiers import (predict_malaria, predict_liverD, predict_heartD, predict_alzheimer, 
-predict_diabetes, predict_cancerB, predict_glaucoma, predict_covid, predict_brain, localizeTumor, predict_disease)
+from models.classifiers import ( predict_liverD, predict_alzheimer, 
+ predict_brain, localizeTumor, predict_disease)
 from models.transcribe import get_text
 import os
 import re
-import cv2
-import json
 import base64
-import random
-import time
-import boto3
 import numpy as np
 from PIL import Image
 
@@ -23,36 +18,7 @@ def front(request):
 def bmiCalc(request):
     return render(request , 'bmi/bmi-calculator.html')
 
-def heart(request):
-    return render(request , 'heart/index.html')
 
-def heartPred(request):
-    if request.method == 'POST':
-        features = list(request.POST.dict().values())[1:]
-        features = list(map(float , features))
-        pred = predict_heartD(np.array([features]))
-        context = {
-            'pred':pred
-        }
-        return render(request , 'heart/output.html' , context)
-    
-    else:
-        redirect('heart-disease/')
-
-def diabetes(request):
-    return render(request , 'diabetes/index.html')
-
-def diabetesPred(request):
-    if request.method == 'POST':
-        features = list(request.POST.dict().values())[1:]
-        pred = predict_diabetes(np.array([features]))
-        context = {
-            'pred':pred
-        }
-        return render(request , 'diabetes/output.html' , context)
-    
-    else:
-        redirect('diabetes/')
 
 def liver(request):
     return render(request , 'liver/index.html')
@@ -72,20 +38,7 @@ def liverPred(request):
     else:
         redirect('liver/')
 
-def cancer(request):
-    return render(request , 'cancer/cancer.html')
 
-def cancerPred(request):
-    if request.method == 'POST':
-        features = list(request.POST.dict().values())[1:]
-        pred = predict_cancerB(np.array([features]))
-        context = {
-            'pred':pred
-        }
-        return render(request , 'cancer/output.html' , context)
-    
-    else:
-        redirect('cancer/')
 
 def alzheimerPred(request):
     if request.method == 'POST'and request.FILES['image']:
@@ -113,31 +66,7 @@ def alzheimerPred(request):
     else:
         return render(request , 'alzheimer/Alzheimer.html')
 
-def covidPred(request):
-    if request.method == 'POST'and request.FILES['image']:
 
-        img = request.FILES['image']
-        fss = FileSystemStorage()
-        file = fss.save(img.name, img)
-        file_url = fss.url(file)
-
-        file_path = os.path.join(settings.MEDIA_ROOT, img.name)
-
-        img = Image.open(img).resize((299, 299))
-        label , cam_path = predict_covid(img , file_path , file_path.replace(".png", "") + "_camViz.jpg")
-
-        with open(cam_path, "rb") as img2str:
-            converted_string = base64.b64encode(img2str.read())
-
-        context = {
-            'file_url': cam_path,
-            'label': label,
-            'photo': str(converted_string)
-        }
-        return JsonResponse(context)
-    
-    else:
-        return render(request , 'covid/covid.html')
 
 def brainPred(request):
     if request.method == 'POST' and request.FILES['image']:
@@ -172,31 +101,8 @@ def brainPred(request):
         return render(request , 'brain/BrainTumor.html')
 
 
-def malariaPred(request):
-    if request.method == 'POST'and request.FILES['image']:
 
-        img = Image.open(request.FILES['image']).convert("RGB").resize((100, 100))
-        label = predict_malaria(img)
-        context = {
-            'label': label,
-        }
-        return JsonResponse(context)
-    
-    else:
-        return render(request , 'malaria/malaria.html')     
 
-def glaucomaPred(request):
-    if request.method == 'POST'and request.FILES['image']:
-
-        img = Image.open(request.FILES['image']).convert("RGB").resize((300, 300))
-        label = predict_glaucoma(img)
-        context = {
-            'label': label,
-        }
-        return JsonResponse(context)
-    
-    else:
-        return render(request , 'glaucoma/index.html')
 
 def symptomsDis(request):
 
