@@ -8,7 +8,13 @@ models/*
 !models/liver-model.pkl
 
 # You can un-ignore additional files like this:
-#!models/another-model.pkl
+!models/classifier.py
+!models/symptom_description.csv
+!models/symptom_precaution.csv
+!models/symptom_severity.csv
+!models/training.csv
+!models/transcribe.py
+!models/utils.py
 
 # Bytecode and cache
 __pycache__/
